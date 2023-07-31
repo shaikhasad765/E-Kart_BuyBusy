@@ -1,3 +1,4 @@
+// Importing necessary dependencies
 import React, { useState } from "react";
 import CommonSection from "../Components/UI/CommonSection";
 import Helmet from "../Components/Helmet/Helmet";
@@ -7,53 +8,37 @@ import products from "../Assets/data/products";
 import ProductList from "../Components/UI/ProductList";
 
 const Shop = () => {
+  // State to hold the current list of products
   const [productsData, setProductsData] = useState(products);
 
-  // handling Filter Products by Category
+  // Function to handle filtering products by category
   const handleFilter = (e) => {
     const filterValue = e.target.value;
 
+    // Filtering the products based on the selected category
     if (filterValue === "sofa") {
-      const filterProducts = products.filter(
-        (item) => item.category === "sofa"
-      );
+      const filterProducts = products.filter((item) => item.category === "sofa");
       setProductsData(filterProducts);
-    }
-
-    if (filterValue === "tshirt") {
-      const filterProducts = products.filter(
-        (item) => item.category === "tshirt"
-      );
+    } else if (filterValue === "tshirt") {
+      const filterProducts = products.filter((item) => item.category === "tshirt");
       setProductsData(filterProducts);
-    }
-
-    if (filterValue === "mobile") {
-      const filterProducts = products.filter(
-        (item) => item.category === "mobile"
-      );
+    } else if (filterValue === "mobile") {
+      const filterProducts = products.filter((item) => item.category === "mobile");
       setProductsData(filterProducts);
-    }
-
-    if (filterValue === "wireless") {
-      const filterProducts = products.filter(
-        (item) => item.category === "wireless"
-      );
+    } else if (filterValue === "wireless") {
+      const filterProducts = products.filter((item) => item.category === "wireless");
       setProductsData(filterProducts);
-    }
-
-    if (filterValue === "watch") {
-      const filterProducts = products.filter(
-        (item) => item.category === "watch"
-      );
+    } else if (filterValue === "watch") {
+      const filterProducts = products.filter((item) => item.category === "watch");
       setProductsData(filterProducts);
     }
   };
 
-  // Handling The Searching
-
+  // Function to handle product search
   const handleSearch = (e) => {
-    const searchTerm = e.target.value;
+    const searchTerm = e.target.value.toLowerCase();
 
+    // Filtering the products based on the search term
     const searchedProducts = products.filter((item) =>
       item.productName.toLowerCase().includes(searchTerm)
     );
@@ -68,7 +53,7 @@ const Shop = () => {
       <section>
         <Container>
           <Row>
-            {/*  Section for  Filter by Category */}
+            {/* Section for filtering by category */}
             <Col lg="3" md="3">
               <div className="filter__widget">
                 <select onChange={handleFilter}>
@@ -82,18 +67,18 @@ const Shop = () => {
               </div>
             </Col>
 
-            {/*  Section for Sorting by  */}
+            {/* Section for sorting */}
             <Col lg="3" md="6" className="text-end">
               <div className="filter__widget">
                 <select>
-                  <option>Sort By </option>
+                  <option>Sort By</option>
                   <option value="ascending">Ascending</option>
-                  <option value="descending">Desending</option>
+                  <option value="descending">Descending</option>
                 </select>
               </div>
             </Col>
 
-            {/*  Section for Searching */}
+            {/* Section for searching */}
             <Col lg="6" md="12">
               <div className="search__box">
                 <input
@@ -110,7 +95,7 @@ const Shop = () => {
         </Container>
       </section>
 
-      {/*  Section for Searching the product if found or not */}
+      {/* Section for displaying search results or "No Products Found" message */}
       <section>
         <Container>
           <Row>
@@ -122,8 +107,6 @@ const Shop = () => {
           </Row>
         </Container>
       </section>
-
-      
     </Helmet>
   );
 };

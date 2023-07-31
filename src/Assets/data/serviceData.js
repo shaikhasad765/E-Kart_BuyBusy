@@ -1,9 +1,10 @@
+// Service data containing information about various services
 const serviceData = [
   {
-    icon: "ri-truck-line",
-    title: "Free Shipping",
-    subtitle: "Lorem ipsum dolor sit amet.",
-    bg: "#fdefe6",
+    icon: "ri-truck-line", // Icon representing the service (using "Remix Icon" library)
+    title: "Free Shipping", // Title of the service
+    subtitle: "Lorem ipsum dolor sit amet.", // Subtitle providing additional information about the service
+    bg: "#fdefe6", // Background color associated with the service
   },
   {
     icon: "ri-refresh-line",

@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
-import "./Header.css";
+import "./Header.css"; // Importing the CSS file specific to the header component
 
+// Importing necessary components and libraries
 import { NavLink, useNavigate, Link} from "react-router-dom";
 import { Container, Row } from "reactstrap";
 import { motion } from "framer-motion";

@@ -1,3 +1,4 @@
+// Import required libraries and components
 import React from 'react'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
@@ -9,20 +10,25 @@ import Routers from "../../Routers/Routers"
 const Layout = () => {
 
   // const location = useLocation();
+   // The return statement defines the structure of the Layout component
   return (
-   <>
-   <Header/>
-   {/* {
-    location.pathname.startsWith('/dashboard')? <AdminNav/>:<Header/>
-   } */}
+    <>
+    {/* Render the Header component */}
+    <Header/>
+    {/* {
+      location.pathname.startsWith('/dashboard')? <AdminNav/>:<Header/>
+    } */}
 
-   <div>
-    <Routers/>
-   </div>
+    {/* Render the Routers component */}
+    <div>
+      <Routers/>
+    </div>
 
-   <Footer/>
-   </>
+    {/* Render the Footer component */}
+    <Footer/>
+    </>
   )
 }
 
+// Export the Layout component to make it available for other parts of the application
 export default Layout

@@ -6,8 +6,10 @@ import { Container, Row, Col, ListGroup, ListGroupItem } from "reactstrap";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
+  // Get the current year
   const year = new Date().getFullYear();
   return (
+    // Footer section with the 'footer' class
     <footer className="footer">
       <Container>
         <Row>
@@ -94,7 +96,9 @@ const Footer = () => {
             </div>
           </Col>
 
+          {/* Bottom section */}
           <Col lg="12">
+            {/* Bottom section */}
             <p className="footer__copyright">
               Copyright {year} developed by - Asadullah Shaikh. All rights
               reserved.

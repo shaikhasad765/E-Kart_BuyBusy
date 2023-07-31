@@ -1,3 +1,4 @@
+// Importing necessary dependencies
 import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -20,16 +21,17 @@ import counterImg from "../Assets/images/counter-timer-img.png";
 const Home = () => {
   // Getting Year
   const year = new Date().getFullYear();
-  // Hook
+
+  // Setting up state variables using useState hook to store product data
   const [trendingProducts, setTrendingProducts] = useState([]);
   const [bestSalesProducts, setBestSalesProducts] = useState([]);
   const [mobileProducts, setMobileProducts] = useState([]);
   const [wirelessProducts, setWirelessProducts] = useState([]);
   const [popularProducts, setPopularProducts] = useState([]);
 
-  // const { data: products, loading } = useGetData("products");
-
+  // useEffect hook to load the data when the component mounts
   useEffect(() => {
+    // Filtering products based on categories
     const filteredTrendingProducts = products.filter(
       (item) => item.category === "tshirt"
     );
@@ -50,12 +52,13 @@ const Home = () => {
       (item) => item.category === "watch"
     );
 
+    // Updating state variables with the filtered products
     setTrendingProducts(filteredTrendingProducts);
     setBestSalesProducts(filteredBestSalesProducts);
     setMobileProducts(filteredMobileProducts);
     setWirelessProducts(filteredWirelessProducts);
     setPopularProducts(filteredPopularProducts);
-  }, []);
+  }, []); // Empty dependency array ensures this useEffect only runs once on component mount
 
   return (
     <Helmet title={"Home"}>
@@ -65,7 +68,7 @@ const Home = () => {
           <Row>
             <Col ig="6" md="6">
               <div className="hero__content">
-                <p className="hero__subtitle">Trending Product in{year}</p>
+                <p className="hero__subtitle">Trending Product in {year}</p>
                 <h2>Make Your Outfit Minimalistic & Modern</h2>
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque
@@ -73,6 +76,7 @@ const Home = () => {
                   nobis dignissimos.
                 </p>
 
+                {/* Button with framer-motion animation and Link to the Shop page */}
                 <motion.button whileTap={{ scale: 1.2 }} className="buy__btn">
                   <Link to="/shop">Shop Now</Link>
                 </motion.button>
@@ -80,6 +84,7 @@ const Home = () => {
             </Col>
 
             <Col ig="6" md="6">
+              {/* Image in the hero section */}
               <div className="hero__img">
                 <img src={heroImg} alt="heroImg" />
               </div>
@@ -87,29 +92,25 @@ const Home = () => {
           </Row>
         </Container>
       </section>
-      {/* Services  */}
+
+      {/* Services section */}
       <Services />
 
-      {/*  Tranding Products Start Here */}
+      {/* Tranding Products Start Here */}
       <section className="trending__products">
         <Container>
           <Row>
             <Col lg="12" className="text-center mb-5">
               <h2 className="section__title">Trending Products</h2>
             </Col>
-            {/* {loading ? (
-              <h5 classname="text-center fw-bold">Loading....</h5>
-            ) : (
-              <ProductList data={trendingProducts} />
-            )} */}
 
-            {/* ProductList Here  */}
+            {/* ProductList to display trending products */}
             <ProductList data={trendingProducts} />
           </Row>
         </Container>
       </section>
 
-      {/*  Best Sales Section here  */}
+      {/* Best Sales Section here  */}
       <section className="best__sales">
         <Container>
           <Row>
@@ -117,12 +118,7 @@ const Home = () => {
               <h2 className="section__title">Best Sales</h2>
             </Col>
 
-            {/* {loading ? (
-              <h5 classname="text-center fw-bold">Loading....</h5>
-            ) : (
-              <ProductList data={bestSalesProducts} />
-            )} */}
-
+            {/* ProductList to display best-selling products */}
             <ProductList data={bestSalesProducts} />
           </Row>
         </Container>
@@ -139,14 +135,17 @@ const Home = () => {
               </div>
               <Clock />
 
+              {/* Button with framer-motion animation and Link to the Shop page */}
               <motion.button
                 whileTap={{ scale: 1.2 }}
-                className="buy__btn store__btn mt-4">
+                className="buy__btn store__btn mt-4"
+              >
                 <Link to="/shop">Visit Store</Link>
               </motion.button>
             </Col>
 
             <Col lg="6" md="6" className="text-end counter__img">
+              {/* Image in the timer count section */}
               <img src={counterImg} alt="" />
             </Col>
           </Row>
@@ -158,21 +157,10 @@ const Home = () => {
         <Container>
           <Row>
             <Col lg="12" className="text-center mb-5">
-              <h2 className="section__title">New Arriavals</h2>
+              <h2 className="section__title">New Arrivals</h2>
             </Col>
 
-            {/* {loading ? (
-              <h5 classname="text-center fw-bold">Loading....</h5>
-            ) : (
-              <ProductList data={mobileProducts} />
-            )} */}
-
-            {/* {loading ? (
-              <h5 classname="text-center fw-bold">Loading....</h5>
-            ) : (
-              <ProductList data={wirelessProducts} />
-            )} */}
-
+            {/* Displaying new mobile and wireless products */}
             <ProductList data={mobileProducts} />
             <ProductList data={wirelessProducts} />
           </Row>
@@ -186,12 +174,8 @@ const Home = () => {
             <Col lg="12" className="text-center mb-5">
               <h2 className="section__title">Popular in Category</h2>
             </Col>
-            {/* 
-            {loading ? (
-              <h5 classname="text-center fw-bold">Loading....</h5>
-            ) : (
-              <ProductList data={popularProducts} />
-            )} */}
+
+            {/* Displaying popular products */}
             <ProductList data={popularProducts} />
           </Row>
         </Container>

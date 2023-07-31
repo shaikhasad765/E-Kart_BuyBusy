@@ -1,3 +1,4 @@
+// Importing necessary dependencies
 import React, { useState } from "react";
 import Helmet from "../Components/Helmet/Helmet";
 import { Container, Row, Col, Form, FormGroup } from "reactstrap";
@@ -11,12 +12,12 @@ import { setDoc, doc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage, db } from "../firebase.config";
 
-// Css
+// CSS
 import "../Styles/Login.css";
 
-// signup component
+// Signup component
 const Signup = () => {
-  // Hooks
+  // Hooks to manage form inputs and state
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,18 +25,22 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // Authentication
+  // Function to handle user signup
   const signup = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+    e.preventDefault(); // Prevent form submission
+    setLoading(true); // Set loading to true to show loading message
+
     try {
+      // Create a new user account with provided email and password
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       console.log("User UID:", user.uid);
 
+      // Set up storage reference for user's profile image
       const storageRef = ref(storage, `images/${user.uid}/${Date.now()}`);
       console.log("Storage Reference:", storageRef);
 
+      // Upload user's profile image to Firebase storage using resumable upload
       const uploadTask = uploadBytesResumable(storageRef, file);
 
       uploadTask.on(
@@ -45,13 +50,14 @@ const Signup = () => {
         },
         (error) => {
           console.error("Upload Error:", error);
-          toast.error(error.message);
+          toast.error(error.message); // Show error message in case of upload failure
         },
         () => {
+          // Once the upload is complete, get the download URL of the uploaded image
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
             console.log("Download URL:", downloadURL);
 
-            // Update user profile
+            // Update user profile with username and profile image URL
             await updateProfile(user, {
               displayName: userName,
               photoURL: downloadURL,
@@ -66,24 +72,26 @@ const Signup = () => {
             });
 
             setLoading(false); // Set loading to false once the upload is complete
-            toast.success("Account Created ");
-            navigate("/login");
+            toast.success("Account Created "); // Show success toast message
+            navigate("/login"); // Navigate to the login page
           });
         }
       );
 
     } catch (error) {
-      setLoading(false);
+      setLoading(false); // Set loading to false in case of signup failure
       console.error("Signup Error:", error);
-      toast.error("Something went wrong");
+      toast.error("Something went wrong"); // Show error toast message
     }
   };
 
   return (
+    // Rendering the Signup page
     <Helmet title="Signup">
       <section>
         <Container>
           <Row>
+            {/* Display loading message if loading is true, otherwise render the signup form */}
             {loading ? (
               <Col lg="12" className="text-center">
                 <h6 className="fw-bold">Loading...</h6>

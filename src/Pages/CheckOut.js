@@ -1,3 +1,4 @@
+// Importing necessary dependencies
 import React from "react";
 import { Container, Row, Col, Form, FormGroup } from "reactstrap";
 import Helmet from "../Components/Helmet/Helmet";
@@ -7,36 +8,35 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-
-
-
-
+// Checkout component
 const CheckOut = () => {
-
+  // Using Redux state to get total quantity and total amount from the cart
   const totalQty = useSelector(state=>state.cart.totalQuantity);
   const totalAmount = useSelector(state=>state.cart.totalAmount)
   const navigate = useNavigate();
 
+  // Function to handle placing an order
   const placeAnOrderHandle = ()=>{
-
-
     try{
+      // Show a success toast message and navigate to the home page
       toast.success("Order Placed");
       navigate('/home')
     }
     catch(error)
     {
+      // Show an error toast message if something goes wrong
       toast.error("Something Went Wrong")
     }
   }
- 
 
   return (
+    // Rendering the Checkout page
     <Helmet title="Checkout">
       <CommonSection title="Checkout" />
       <section>
         <Container>
           <Row>
+            {/* Section for billing information */}
             <Col lg="8">
               <h6 className="mb-4 fw-bold">Billing Information</h6>
               <Form className="billing__form">
@@ -68,6 +68,7 @@ const CheckOut = () => {
                 </FormGroup>
               </Form>
             </Col>
+            {/* Section for order summary */}
             <Col lg="4">
               <div className="checkout__cart">
                 <h6>
@@ -89,11 +90,11 @@ const CheckOut = () => {
                   Total Cost: <span>{totalAmount}</span>
                 </h4>
 
+                {/* Button to place an order */}
                 <button className="buy__btn auto__btn w-100" onClick={placeAnOrderHandle}>
                 Place an order
               </button>
               </div>
-           
             </Col>
           </Row>
         </Container>
